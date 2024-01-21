@@ -1,0 +1,86 @@
+﻿<p>Teste tela</p>
+@model ModelTest
+<form asp-controller="Home" asp-action="NovaTela">
+        <div class="col-6">
+    <label for="Nome">Nome</label>
+    @Html.TextBoxFor(c => c.Nome, new { @class = "form-control" })
+    <br />
+    <label for="Quantidade">Quantidade</label>
+    @Html.TextBoxFor(c => c.Quantidade, new { @class = "form-control" })
+    </div>
+    <br />
+    <button type="submit" class="btn btn-danger">Salvar </button>
+
+
+
+    <div class="col-12">
+        <hr />
+    </div>
+    <label>Filtros</label>
+    @if (ViewBag.Usuarios != null)
+    {
+        @Html.DropDownListFor(c => c.Id, new SelectList(ViewBag.Usuarios, "Key", "Value"), new { @class = "form-control" })
+    }
+    
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ItensGrid)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Nome</td>
+                    <td>@item.Quantidade</td>
+                    <td>
+                        <a asp-controller="Home" asp-action="Editar" asp-route-id="@item.Id" as class="btn btn-sm btn-info">Editar</a>&nbsp;
+                        <button type="button" class="btn btn-sm btn-warning" onclick="AbrirModalExcluir(@item.Id)">Excluir</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+
+@Html.HiddenFor(c => c.Id)
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Deseja realmete remover o registro selecionado?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
+                <a onclick="Remover()" class="btn btn-success">Sim</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function AbrirModalExcluir(id) {
+        $("#Id").val(id);
+
+        var myModal = new bootstrap.Modal(document.getElementById("exampleModal"), {});
+        myModal.show();
+    }
+
+    function Remover() {
+        $.post("Excluir/" + $("#Id").val(),
+            function (data) {
+                window.location.replace("https://localhost:7197/Home/NovaTela");
+            })
+    }
+</script>
