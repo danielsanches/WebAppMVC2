@@ -23,8 +23,7 @@ namespace WebAppMVC2.Controllers
         [HttpPost]
         public IActionResult NovaTela(ModelTest model)
         {
-            if (modelTest == null)
-                modelTest = new ModelTest();
+            modelTest ??= new ModelTest();
 
             PreencherItensGrid(model);
 
