@@ -1,12 +1,12 @@
 ﻿<p>Teste tela</p>
-@model ModelTest
-<form asp-controller="Home" asp-action="NovaTela">
-        <div class="col-6">
-    <label for="Nome">Nome</label>
-    @Html.TextBoxFor(c => c.Nome, new { @class = "form-control" })
-    <br />
-    <label for="Quantidade">Quantidade</label>
-    @Html.TextBoxFor(c => c.Quantidade, new { @class = "form-control" })
+@model WebAppMVC2.Models.Teste.NovaTelaViewModel
+<form asp-controller="Teste" asp-action="NovaTela">
+    <div class="col-6">
+        <label for="Nome">Nome</label>
+        @Html.TextBoxFor(c => c.Nome, new { @class = "form-control" })
+        <br />
+        <label for="Quantidade">Quantidade</label>
+        @Html.TextBoxFor(c => c.Quantidade, new { @class = "form-control" })
     </div>
     <br />
     <button type="submit" class="btn btn-danger">Salvar </button>
@@ -21,7 +21,7 @@
     {
         @Html.DropDownListFor(c => c.Id, new SelectList(ViewBag.Usuarios, "Key", "Value"), new { @class = "form-control" })
     }
-    
+
 
     <table class="table">
         <thead>
@@ -40,7 +40,7 @@
                     <td>@item.Nome</td>
                     <td>@item.Quantidade</td>
                     <td>
-                        <a asp-controller="Home" asp-action="Editar" asp-route-id="@item.Id" as class="btn btn-sm btn-info">Editar</a>&nbsp;
+                        <a asp-controller="Teste" asp-action="Editar" asp-route-id="@item.Id" as class="btn btn-sm btn-info">Editar</a>&nbsp;
                         <button type="button" class="btn btn-sm btn-warning" onclick="AbrirModalExcluir(@item.Id)">Excluir</button>
                     </td>
                 </tr>
@@ -68,7 +68,6 @@
     </div>
 </div>
 
-
 <script type="text/javascript">
     function AbrirModalExcluir(id) {
         $("#Id").val(id);
@@ -80,7 +79,7 @@
     function Remover() {
         $.post("Excluir/" + $("#Id").val(),
             function (data) {
-                window.location.replace("https://localhost:7197/Home/NovaTela");
+                window.location.replace("https://localhost:7197/Teste/NovaTela");
             })
     }
 </script>

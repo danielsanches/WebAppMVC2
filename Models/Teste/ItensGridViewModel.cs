@@ -1,6 +1,6 @@
-﻿namespace WebAppMVC2.Models
+﻿namespace WebAppMVC2.Models.Teste
 {
-    public class ItensGrid
+    public class ItensGridViewModel
     {
         public int Id { get; set; }
         public int Quantidade { get; set; }

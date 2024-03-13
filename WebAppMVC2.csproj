@@ -6,4 +6,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Scripts\Home\" />
+	  <Folder Include="Scripts\Teste\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Scripts\Teste\NovaTela.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
